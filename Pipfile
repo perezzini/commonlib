@@ -1,0 +1,35 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+psycopg2-binary = "*"
+loguru = "*"
+sqlmodel = "*"
+fastapi = "*"
+
+[dev-packages]
+black = "*"
+flake8 = "*"
+mypy = "*"
+ipython = "*"
+pytest = "*"
+pytest-cov = "*"
+pipenv-setup = "*"
+
+[requires]
+python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true
+
+[scripts]
+shell = "ipython"
+flake8 = "flake8 --max-line-length=120 --max-complexity=15 commonlib/"
+mypy = "python -m mypy commonlib/"
+black = "python -m black --fast commonlib/"
+tests = "python -m pytest --cov=commonlib tests/"
+pre = "${SHELL} -c 'pipenv run black && pipenv run flake8 && pipenv run mypy && pipenv run tests'"
+sync_setup = "pipenv run pipenv-setup sync"
+check_setup = "pipenv run pipenv-setup check"
